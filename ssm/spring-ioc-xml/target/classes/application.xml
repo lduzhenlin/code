@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="constructorService" class="com.joe.instance.ConstructorService"></bean>
+
+    <bean id="staticFactoryMethodService" class="com.joe.instance.StaticFactoryMethodService" factory-method="createInstance"></bean>
+
+    <bean id="instanceFactoryMethodService" class="com.joe.instance.InstanceFactoryMethodService"></bean>
+    <bean id="objService" factory-bean="instanceFactoryMethodService" factory-method="createInstance"></bean>
+
+
+
+<!--    依赖注入-->
+<!--    通过构造器方式进行依赖注入-->
+    <bean id="example" class="com.joe.di.constructor.Example">
+        <constructor-arg name="name" value="张三"></constructor-arg>
+        <constructor-arg name="age" value="21"></constructor-arg>
+    </bean>
+
+    <bean id="thing" class="com.joe.di.constructor.Thing">
+        <constructor-arg name="thingOne" ref="thingOne"></constructor-arg>
+        <constructor-arg name="thingTwo" ref="thingTwo"></constructor-arg>
+    </bean>
+    <bean id="thingOne" class="com.joe.di.constructor.ThingOne"></bean>
+    <bean id="thingTwo" class="com.joe.di.constructor.ThingTwo"></bean>
+
+    <!--    通过setter方式进行依赖注入-->
+    <bean id="exampleBean" class="com.joe.di.setter.ExampleBean">
+        <property name="anotherBean" ref="anotherBean"></property>
+        <property name="yetAnotherBean" ref="yetAnotherBean"></property>
+    </bean>
+    <bean id="anotherBean" class="com.joe.di.setter.AnotherBean"></bean>
+    <bean id="yetAnotherBean" class="com.joe.di.setter.YetAnotherBean"></bean>
+</beans>
